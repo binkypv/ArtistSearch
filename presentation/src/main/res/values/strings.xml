@@ -1,0 +1,4 @@
+<resources>
+    <string name="members_header">Members:</string>
+    <string name="search_bar_hint">Enter a band!</string>
+</resources>

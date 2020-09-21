@@ -1,0 +1,6 @@
+include ':presentation'
+include ':domain'
+include ':data'
+include ':di'
+include ':app'
+rootProject.name = "SearchSpotifyModules"

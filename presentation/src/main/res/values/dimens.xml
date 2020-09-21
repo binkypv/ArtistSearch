@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="small_space">8dp</dimen>
+    <dimen name="normal_space">16dp</dimen>
+    <dimen name="search_icon_size">24dp</dimen>
+    <dimen name="artist_header_size">300dp</dimen>
+    <dimen name="progress_bar_elevation">10dp</dimen>
+</resources>

@@ -8,8 +8,8 @@ private const val USER_AGENT_HEADER = "User-Agent"
 private const val AUTHORIZATION_HEADER = "Authorization"
 private const val AUTHORIZATION_KEY = "Discogs key="
 private const val AUTHORIZATION_SECRET = "secret="
-private const val KEY = "sJfEfJJDeMfBQIjUlXyC"
-private const val SECRET = "xJXNGmltzJREKUscIgmVedTatmrhfixu"
+private const val KEY = "YOUR KEY HERE"
+private const val SECRET = "YOUR SECRET HERE"
 
 class AuthInterceptor: Interceptor{
     override fun intercept(chain: Interceptor.Chain): Response {

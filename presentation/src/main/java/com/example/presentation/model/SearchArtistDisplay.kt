@@ -13,7 +13,14 @@ data class ArtistResultDisplay(
     val id: Int,
     val title: String,
     val image: String?
-)
+): ArtistListItem(){
+    override fun areItemsTheSame(other: ArtistListItem) =
+        other is ArtistResultDisplay && other.id == id
+
+    override fun areContentsTheSame(other: ArtistListItem) =
+        other is ArtistResultDisplay && other == this
+
+}
 
 fun ArtistSearchModel.toDisplay() = ArtistSearchDisplay(
     pagination.urls.next,
@@ -24,3 +31,17 @@ fun ArtistSearchModel.toDisplay() = ArtistSearchDisplay(
 fun ArtistResultModel.toDisplay() = ArtistResultDisplay(
     id, title, thumb
 )
+
+sealed class ArtistListItem{
+    abstract fun areItemsTheSame(other: ArtistListItem): Boolean
+    abstract fun areContentsTheSame(other: ArtistListItem): Boolean
+}
+
+object ArtistLoadingItem: ArtistListItem(){
+    override fun areItemsTheSame(other: ArtistListItem) =
+        other is ArtistLoadingItem
+
+    override fun areContentsTheSame(other: ArtistListItem) =
+        other is ArtistLoadingItem
+
+}

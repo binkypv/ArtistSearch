@@ -15,7 +15,8 @@ data class PaginationModel(
 
 data class PaginationUrlsModel(
     val last: String?,
-    val next: String?
+    val next: String?,
+    val prev: String?
 )
 
 data class ArtistResultModel(

@@ -28,10 +28,12 @@ data class PaginationEntity(
 
 @JsonClass(generateAdapter = true)
 data class PaginationUrlsEntity(
+    @SerializedName("first") val first: String?,
     @SerializedName("last") val last: String?,
-    @SerializedName("next") val next: String?
+    @SerializedName("next") val next: String?,
+    @SerializedName("prev") val prev: String?
 ) {
-    fun toDomain() = PaginationUrlsModel(last, next)
+    fun toDomain() = PaginationUrlsModel(last, next, prev)
 }
 
 @JsonClass(generateAdapter = true)

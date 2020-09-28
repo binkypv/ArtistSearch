@@ -11,8 +11,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.presentation.adapter.ArtistAdapter
 import com.example.presentation.databinding.FragmentSearchBinding
+import com.example.presentation.model.ArtistListItem
+import com.example.presentation.model.ArtistLoadingItem
+import com.example.presentation.utils.ScrollPaginator
 import com.example.presentation.viewmodel.SearchViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -48,6 +52,13 @@ class SearchFragment : Fragment() {
                 DividerItemDecoration.VERTICAL
             )
         )
+
+        binding.artistsList.addOnScrollListener(object :
+        ScrollPaginator(binding.artistsList.layoutManager as LinearLayoutManager){
+            override fun loadMoreItems() {
+                searchViewModel.loadNextPage()
+            }
+        })
     }
 
     private fun initListeners() {
@@ -72,10 +83,11 @@ class SearchFragment : Fragment() {
 
         searchViewModel.results.observe(viewLifecycleOwner, {
             binding.loading.visibility = View.GONE
-            adapter.submitList(it.results)
+            adapter.submitList(it)
         })
 
         searchViewModel.error.observe(viewLifecycleOwner, {
+            binding.loading.visibility = View.GONE
             Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
         })
     }

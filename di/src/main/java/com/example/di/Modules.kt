@@ -11,6 +11,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -43,7 +44,9 @@ class Modules {
         val netModule = module {
 
             fun provideHttpClient(): OkHttpClient {
-                val okHttpClientBuilder = OkHttpClient.Builder().addInterceptor(AuthInterceptor())
+                val okHttpClientBuilder = OkHttpClient.Builder().addInterceptor(AuthInterceptor()).addInterceptor(
+                    HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+                )
                 return okHttpClientBuilder.build()
             }
 

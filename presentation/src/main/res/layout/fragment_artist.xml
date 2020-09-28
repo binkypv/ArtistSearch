@@ -58,6 +58,7 @@
                 android:layout_marginStart="@dimen/small_space"
                 android:layout_marginTop="@dimen/small_space"
                 android:layout_marginEnd="@dimen/small_space"
+                android:layout_marginBottom="@dimen/small_space"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"

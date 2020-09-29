@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.model.ArtistModel
-import com.example.domain.model.ArtistSearchModel
 import com.example.domain.repository.SearchRepository
 import com.example.domain.utils.Resource
 import com.example.presentation.model.ArtistDisplay
@@ -24,12 +22,12 @@ class ArtistViewModel(val repository: SearchRepository) : ViewModel() {
     private val _loading = MutableLiveData<Unit>()
     val loading: LiveData<Unit> = _loading
 
-    private val exceptionHandler = CoroutineExceptionHandler{_,  exception ->
+    private val exceptionHandler = CoroutineExceptionHandler { _, exception ->
         _error.postValue(exception.message)
     }
 
     fun loadArtist(id: Int) =
-        viewModelScope.launch(exceptionHandler){
+        viewModelScope.launch(exceptionHandler) {
             _loading.postValue(Unit)
             _artist.postValue(Resource.Success(repository.getArtist(id)).data?.toDisplay())
         }

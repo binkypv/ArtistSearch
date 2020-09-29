@@ -1,12 +1,13 @@
 package com.example.presentation.viewmodel
 
-import androidx.lifecycle.*
-import com.example.domain.model.ArtistSearchModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.domain.repository.SearchRepository
 import com.example.domain.utils.Resource
 import com.example.presentation.model.ArtistListItem
 import com.example.presentation.model.ArtistLoadingItem
-import com.example.presentation.model.ArtistSearchDisplay
 import com.example.presentation.model.toDisplay
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch

@@ -14,8 +14,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.presentation.adapter.ArtistAdapter
 import com.example.presentation.databinding.FragmentSearchBinding
-import com.example.presentation.model.ArtistListItem
-import com.example.presentation.model.ArtistLoadingItem
 import com.example.presentation.utils.ScrollPaginator
 import com.example.presentation.viewmodel.SearchViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -54,7 +52,7 @@ class SearchFragment : Fragment() {
         )
 
         binding.artistsList.addOnScrollListener(object :
-        ScrollPaginator(binding.artistsList.layoutManager as LinearLayoutManager){
+            ScrollPaginator(binding.artistsList.layoutManager as LinearLayoutManager) {
             override fun loadMoreItems() {
                 searchViewModel.loadNextPage()
             }

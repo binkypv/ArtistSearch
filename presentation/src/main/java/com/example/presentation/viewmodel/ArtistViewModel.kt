@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.repository.SearchRepository
-import com.example.domain.utils.Resource
 import com.example.presentation.model.ArtistDisplay
 import com.example.presentation.model.toDisplay
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -29,6 +28,6 @@ class ArtistViewModel(val repository: SearchRepository) : ViewModel() {
     fun loadArtist(id: Int) =
         viewModelScope.launch(exceptionHandler) {
             _loading.postValue(Unit)
-            _artist.postValue(Resource.Success(repository.getArtist(id)).data?.toDisplay())
+            _artist.postValue(repository.getArtist(id).toDisplay())
         }
 }

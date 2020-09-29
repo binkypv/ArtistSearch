@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.repository.SearchRepository
-import com.example.domain.utils.Resource
 import com.example.presentation.model.ArtistListItem
 import com.example.presentation.model.ArtistLoadingItem
 import com.example.presentation.model.toDisplay
@@ -16,9 +15,6 @@ class SearchViewModel(val repository: SearchRepository) : ViewModel() {
 
     private val _results = MutableLiveData<List<ArtistListItem>>()
     val results: LiveData<List<ArtistListItem>> = _results
-
-    private val _nextUrl = MutableLiveData<String>()
-    val nextUrl: LiveData<String> = _nextUrl
 
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
@@ -39,11 +35,11 @@ class SearchViewModel(val repository: SearchRepository) : ViewModel() {
         viewModelScope.launch(exceptionHandler) {
             searchTerm = search
             _loading.postValue(Unit)
-            val artistSearch = Resource.Success(repository.searchArtists(search)).data?.toDisplay()
+            val artistSearch = repository.searchArtists(search).toDisplay()
             val newResults: MutableList<ArtistListItem> =
-                artistSearch?.results?.toMutableList() ?: mutableListOf()
+                artistSearch?.results?.toMutableList()
             page = 2
-            nextPage = if (artistSearch?.nextUrl.isNullOrEmpty()) {
+            nextPage = if (artistSearch.nextUrl.isNullOrEmpty()) {
                 false
             } else {
                 newResults.add(ArtistLoadingItem)
@@ -60,15 +56,14 @@ class SearchViewModel(val repository: SearchRepository) : ViewModel() {
                     _results.value?.toMutableList()?.apply { remove(ArtistLoadingItem) }
                         ?: mutableListOf()
                 val artistSearch =
-                    Resource.Success(
                         repository.searchArtists(
                             searchTerm ?: "",
                             page
                         )
-                    ).data?.toDisplay()
+                    .toDisplay()
                 page++
                 val newResults: MutableList<ArtistListItem> =
-                    artistSearch?.results?.toMutableList() ?: mutableListOf()
+                    artistSearch?.results?.toMutableList()
                 if (artistSearch?.nextUrl.isNullOrEmpty()) {
                     nextPage = false
                 } else {

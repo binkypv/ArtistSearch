@@ -4,8 +4,8 @@
     <application>
         <activity
             android:name=".view.activity.SearchActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

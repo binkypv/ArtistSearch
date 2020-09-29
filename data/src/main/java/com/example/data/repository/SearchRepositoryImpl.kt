@@ -6,7 +6,7 @@ import com.example.domain.model.ArtistSearchModel
 import com.example.domain.repository.SearchRepository
 
 private const val SEARCH_ARTIST_TYPE = "artist"
-private const val PAGE_SIZE = 10
+private const val PAGE_SIZE = 9
 
 class SearchRepositoryImpl(
     val searchDataSource: SearchDataSource

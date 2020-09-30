@@ -34,17 +34,19 @@ class SearchViewModel(val repository: SearchRepository) : ViewModel() {
     fun onSearchClicked(search: String) =
         viewModelScope.launch(exceptionHandler) {
             searchTerm = search
-            _loading.postValue(Unit)
-            val artistSearch = repository.searchArtists(search).toDisplay()
-            val newResults: MutableList<ArtistListItem> =
-                artistSearch?.results?.toMutableList()
             page = 2
+            _loading.postValue(Unit)
+
+            val artistSearch = repository.searchArtists(search).toDisplay()
+            val newResults: MutableList<ArtistListItem> = artistSearch.results.toMutableList()
+
             nextPage = if (artistSearch.nextUrl.isNullOrEmpty()) {
                 false
             } else {
                 newResults.add(ArtistLoadingItem)
                 true
             }
+
             _results.postValue(newResults)
         }
 
@@ -63,8 +65,8 @@ class SearchViewModel(val repository: SearchRepository) : ViewModel() {
                     .toDisplay()
                 page++
                 val newResults: MutableList<ArtistListItem> =
-                    artistSearch?.results?.toMutableList()
-                if (artistSearch?.nextUrl.isNullOrEmpty()) {
+                    artistSearch.results.toMutableList()
+                if (artistSearch.nextUrl.isNullOrEmpty()) {
                     nextPage = false
                 } else {
                     newResults.add(ArtistLoadingItem)
@@ -75,5 +77,4 @@ class SearchViewModel(val repository: SearchRepository) : ViewModel() {
             }
         }
     }
-
 }

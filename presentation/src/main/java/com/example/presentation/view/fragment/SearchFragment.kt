@@ -136,7 +136,7 @@ class SearchFragment : Fragment() {
         searchViewModel.onSearchClicked(term)
     }
 
-        override fun onSaveInstanceState(outState: Bundle) {
+    override fun onSaveInstanceState(outState: Bundle) {
         outState.putInt(
             RECYCLER_VIEW_POSITION_KEY,
             (binding.artistsList.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
